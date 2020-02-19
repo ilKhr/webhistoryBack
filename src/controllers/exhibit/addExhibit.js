@@ -1,6 +1,6 @@
-const { models } = require('../database');
+const { models } = require('../../database');
 
-exports.addExhibit = async function(req, res) {
+module.exports = async function addExhibit(req, res) {
     console.log(models.Exhibit);
     const { uid, name, description, image, categories } = req.body;
     try {

@@ -4,20 +4,34 @@ function defineUser(database) {
     const User = database.define(
         'users',
         {
-            username: {
+            name: {
                 type: Sequelize.STRING,
                 alowNull: false,
+            },
+            lastname: {
+                type: Sequelize.STRING,
+                alowNull: false,
+                field: 'last_name',
+            },
+            email: {
+                type: Sequelize.STRING,
+                alowNull: false,
+                unique: true,
             },
             password: {
                 type: Sequelize.STRING,
                 alowNull: false,
             },
+            role: {
+                type: Sequelize.SMALLINT,
+                defaultValue: 2,
+            },
         },
         {
-            timestamps: false,
-        }
+            timestamps: true,
+        },
     );
-    // User.sync();
+    // User.sync({ alter: true });
 
     return User;
 }

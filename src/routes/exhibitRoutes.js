@@ -1,6 +1,12 @@
 const exhibitRouter = require('express').Router();
-const exhibitController = require('../controllers/exhibitController');
+const exhibitControllers = require('../controllers/exhibitControllers');
+console.log('exhibitControllers: ', exhibitControllers);
 
-exhibitRouter.post('/', exhibitController.addExhibit);
+
+
+exhibitRouter.post('/', exhibitControllers.addExhibit);
+exhibitRouter.delete('/:uid', exhibitControllers.deleteExhibit);
+
+
 
 module.exports = exhibitRouter;

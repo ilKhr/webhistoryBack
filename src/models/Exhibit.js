@@ -30,7 +30,7 @@ function defineExhibit(database) {
             timestamps: true,
         }
     );
-    Exhibit.sync();
+    // Exhibit.sync();
 
     return Exhibit;
 }
