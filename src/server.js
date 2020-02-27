@@ -1,5 +1,6 @@
 //подключем express
 const express = require('express');
+require('dotenv').config();
 const { database, models } = require('./database');
 const Routes = require('./routes/Routes');
 const bodyParser = require('body-parser');

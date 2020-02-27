@@ -1,6 +1,6 @@
 const { models } = require('../../database');
 
-module.exports = async function readExhibit(req, res) {
+module.exports = async function findOneExhibit(req, res) {
     const { uid } = req.params;
     console.log(uid);
     try {

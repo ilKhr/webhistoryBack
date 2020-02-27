@@ -1,11 +1,10 @@
 const { models } = require('../../database');
 
-module.exports = async function readExhibit(req, res) {
+module.exports = async function getAllExhibits(req, res) {
     const { uid } = req.params;
-    console.log(uid);
     try {
         const result = await models.Exhibit.findAll();
-        console.log(result);
+        // console.log(result);
         res.json(result);
     } catch (error) {
         console.log('error: ', error);
