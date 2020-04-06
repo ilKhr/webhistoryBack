@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 
+
 function defineUser(database) {
     const User = database.define(
         'users',
@@ -7,11 +8,6 @@ function defineUser(database) {
             name: {
                 type: Sequelize.STRING,
                 alowNull: false,
-            },
-            lastname: {
-                type: Sequelize.STRING,
-                alowNull: false,
-                field: 'last_name',
             },
             email: {
                 type: Sequelize.STRING,
@@ -31,9 +27,12 @@ function defineUser(database) {
             timestamps: true,
         },
     );
-    // User.sync({ alter: true });
+    // User.hasMany(Exhibit(database), {as: 'kek', foreignKey: 'uid'});
+    // User.sync({force: true});
+
 
     return User;
 }
+
 
 module.exports = defineUser;

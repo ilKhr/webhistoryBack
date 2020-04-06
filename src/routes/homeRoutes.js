@@ -1,7 +1,10 @@
-const homeRouter = require('express').Router();
-const homeControllers = require('../controllers/home/homeControllers');
+const router = require('express').Router();
 
-homeRouter.get('/about', homeControllers.about);
-homeRouter.get('/', homeControllers.index);
+router.get('/', (req, res) => {
+    res.send('Главная страница');
+});
+router.get('/about', (req, res) => {
+    res.send('О сайте');
+});
 
-module.exports = homeRouter;
+module.exports = router;

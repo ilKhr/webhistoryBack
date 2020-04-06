@@ -1,14 +1,302 @@
-const exhibitRouter = require('express').Router();
-const exhibitControllers = require('../controllers/exhibitControllers');
+const router = require('express').Router();
+const multer = require('multer');
+const {sequelize} = require('../../database')
+const upload = require('../../multerConfig').array("multipleImage", 3);
+const {models} = require('../../database');
 
 
+async function findAndCountExhibit(limit, offset) {
+    return models.Exhibit.findAndCountAll({
+        distinct: true,
+        include: [{
+            model: models.Image
+        }],
+        order: [
+            ['name', 'ASC']
+        ],
+        offset, limit
+    });
+}
 
-exhibitRouter.post('/', exhibitControllers.addExhibit);
-exhibitRouter.get('/', exhibitControllers.getAllExhibits);
-exhibitRouter.delete('/:uid', exhibitControllers.deleteExhibit);
-exhibitRouter.get('/:uid', exhibitControllers.findOneExhibit);
+function parseImageName(array, path) {
+    const images = []
+    array.forEach(photo => {
+        images.push(path + photo.name)
+    })
+    return images
+}
+
+function checkPages(countMaxPages, offset) {
+    if (countMaxPages <= offset || countMaxPages < 0) {
+        const err = {
+            err: new Error("Oops, превышен лимит страниц:)"),
+            status: 404,
+            code: "Page undefined"
+        };
+        if (err) {
+            throw err
+        }
+    }
+
+}
+
+function getData(data) {
+    if (Array.isArray(data))
+        return (data.map(item => {
+                return ({
+                    name: item.name,
+                    description: item.description,
+                    categories: item.categories,
+                    image: parseImageName(item.images, 'src/dev/images')
+                })
+            })
+        )
+    return {
+        name: data.name, description: data.description,
+        categories: data.categories,
+        image: parseImageName(data.images, 'src/dev/images')
+    }
+}
+
+router.get(`/`, async (req, res, next) => {
+        const {limit, offset} = req.query;
+        try {
+            const {count, rows: result} = await findAndCountExhibit(limit, offset);
+            const countMaxPages = Math.round(count / limit);
+            checkPages(countMaxPages, offset);
+            const responseData = getData(result);
+
+            res.json({
+                ok: true,
+                responseData
+            });
+        } catch
+            (error) {
+            res.json({
+                ok: false,
+                error,
+            });
+            console.log(error)
+        }
+    }
+);
+
+router.delete('/:uid', async (req, res) => {
+    const {uid} = req.params;
+    try {
+        const result = await models.Exhibit.findOne({
+            where: {uid: uid},
+            include: [{
+                model: models.Image,
+                where: {owner: uid}
+            }]
 
 
+        });
+
+        const isDestroy = (async function () {
+            if (result.images) {
+                await models.Image.destroy({where: {owner: uid}})
+            }
+            const resultDestroy = await models.Exhibit.destroy({where: {uid: uid}})
+            return resultDestroy
+        })();
+
+        if (isDestroy)
+            res.json({
+                ok: true,
+                isDestroy,
+            });
+        else {
+            res.status(400).send('Exhibit not exist');
+        }
+    } catch (error) {
+        res.json({
+            ok: false,
+            error,
+        });
+    }
+});
+
+router.get('/:uid', async (req, res) => {
+    const {uid} = req.params;
+    try {
+        const result = await models.Exhibit.findOne({
+            where: {uid: uid},
+            include: [{
+                model: models.Image,
+                where: {owner: uid}
+            }]
+        });
+        const responseData = getData(result);
+
+        res.json({
+            ok: true,
+            responseData,
+        });
+    } catch (error) {
+        res.json({
+            ok: false,
+            error,
+        });
+        console.log(error)
+    }
+});
 
 
-module.exports = exhibitRouter;
+// НЕ РАБОТАЕТ ------------------------------------------------------->
+router.put('/', async (req, res) => {
+    upload(req, res, async function (err) {
+        if (!err) {
+            const {uid, name, description, categories} = req.body;
+
+            const files = req.files;
+
+
+            const sendDataFiles = [];
+
+            for (const image of files) {
+                // sendDataFiles.push({owner: uid, name: image.filename+"GRYA"})
+                sendDataFiles.push({owner: uid, name: "lol"})
+
+            }
+            try {
+                const result = await models.Exhibit.findOne({
+                    where: {uid: uid},
+                    include: [{
+                        model: models.Image,
+                        as: 'images'
+                    }]
+                });
+
+
+                // result.images.map((image, index) => {
+                //     image.name = sendDataFiles[index].name
+                //
+                // })
+
+                result.set({images:[{name: "DSADSAD"}, {name: "sfdsffds"}]})
+                console.log(JSON.stringify(result.images))
+                if (result.images.length < sendDataFiles.length) {
+                    const inputFiles = sendDataFiles.length;
+                    const existFiles = result.images.length;
+                    sendDataFiles.splice(0, existFiles)
+                    await models.Image.bulkCreate(sendDataFiles);
+                }
+
+
+                if (result) {
+
+                    const resultUpdateExhibit = await result.save()
+                    // const resultUpdateExhibit = await result.update({
+                    //     name,
+                    //     description,
+                    //     categories,
+                    //     include: [{model: models.Image}]
+                    // });
+
+                    // console.log(JSON.stringify(result, null, 4))
+
+                    if (resultUpdateExhibit) {
+                        res.json({
+                            ok: true,
+                            resultUpdateExhibit
+                        });
+                    }
+                } else {
+                    res.json({
+                        ok: false,
+                        message: "И где данные?",
+                    });
+                }
+            } catch (error) {
+                res.json({
+                    ok: false,
+                    error,
+                });
+                console.log(error)
+            }
+        } else if (err instanceof multer.MulterError) {
+            if (err.code === 'LIMIT_FILE_SIZE') {
+                res.json({
+                    ok: false,
+                    message: "File too large"
+                })
+            } else if (err.code === "LIMIT_FILE_COUNT") {
+                res.json({
+                    ok: false,
+                    message: "Too many files"
+                })
+
+            }
+        } else if (err) {
+            res.json({
+                ok: false,
+                message: "Тип файла не подходит"
+            })
+        }
+    })
+});
+// НЕ РАБОТАЕТ ------------------------------------------------------->
+
+
+//
+router.post('/', (req, res) => {
+    upload(req, res, async function (err) {
+        //Ошибки нет
+        if (!err) {
+            try {
+                const files = req.files;
+                const {uid, name, description, categories} = req.body;
+                const sendDataFiles = [];
+
+                for (const file of files) {
+                    sendDataFiles.push({owner: uid, name: file.filename})
+                }
+
+                const resultCreateExhibit = await models.Exhibit.create({uid, name, description, categories});
+                if (resultCreateExhibit) {
+                    await models.Image.bulkCreate(sendDataFiles);
+                    res.json({
+                        ok: true,
+                        resultCreateExhibit
+                    });
+                }
+
+            } catch (error) {
+                res.json({
+                    ok: false,
+                    error,
+                });
+
+            }
+        } else if (err instanceof multer.MulterError) {
+            if (err.code === 'LIMIT_FILE_SIZE') {
+                res.json({
+                    ok: false,
+                    message: "File too large"
+                })
+            } else if (err.code === "LIMIT_FILE_COUNT") {
+                res.json({
+                    ok: false,
+                    message: "Too many files"
+                })
+
+            }
+        } else if (err) {
+            res.json({
+                ok: false,
+                message: "Тип файла не подходит"
+            })
+        }
+
+    })
+});
+
+
+// const {uid, name, description, image, categories} = req.body;
+
+
+module.exports = router;
+
+
