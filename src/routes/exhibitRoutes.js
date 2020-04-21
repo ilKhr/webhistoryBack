@@ -9,7 +9,8 @@ async function findAndCountExhibit(limit, offset) {
     return models.Exhibit.findAndCountAll({
         distinct: true,
         include: [{
-            model: models.Image
+            model: models.Image,
+            as: 'images'
         }],
         order: [
             ['name', 'ASC']
@@ -88,7 +89,8 @@ router.delete('/:uid', async (req, res) => {
             where: {uid: uid},
             include: [{
                 model: models.Image,
-                where: {owner: uid}
+                where: {owner: uid},
+                as: 'images'
             }]
 
 
@@ -125,7 +127,9 @@ router.get('/:uid', async (req, res) => {
             where: {uid: uid},
             include: [{
                 model: models.Image,
-                where: {owner: uid}
+                where: {owner: uid},
+                as: 'images'
+
             }]
         });
         const responseData = getData(result);
