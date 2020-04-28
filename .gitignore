@@ -5,3 +5,4 @@ src/temp
 *.env
 .env
 /.env
+.idea
