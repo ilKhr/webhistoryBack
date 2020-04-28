@@ -1,16 +1,17 @@
 const Sequelize = require('sequelize');
+const Exhibit = require('./Exhibit');
 
 function defineImage(database) {
     const Image = database.define(
         'images',
         {
             owner: {
-                type: Sequelize.STRING,
-                alowNull: false,
+                type: Sequelize.INTEGER,
+                allowNull: false,
             },
             name: {
                 type: Sequelize.STRING,
-                alowNull: false,
+                allowNull: false,
             },
         },
         {

@@ -1,15 +1,26 @@
 const router = require('express').Router();
 const multer = require('multer');
+const fs = require('fs');
 const {sequelize} = require('../../database')
 const upload = require('../../multerConfig').array("multipleImage", 3);
 const {models} = require('../../database');
+const app = require('../../app')
 
+async function deleteErrorImage(res, sendDataFiles) {
+        sendDataFiles.forEach(file => {
+            fs.unlink( res.app.get('root') + `/public/images/${file.name}`,
+                function (err) {
+                    if (err) throw err;
+                });
+        })
+}
 
 async function findAndCountExhibit(limit, offset) {
     return models.Exhibit.findAndCountAll({
         distinct: true,
         include: [{
-            model: models.Image
+            model: models.Image,
+            as: "exh_img"
         }],
         order: [
             ['name', 'ASC']
@@ -40,21 +51,21 @@ function checkPages(countMaxPages, offset) {
 
 }
 
-function getData(data) {
+function getData(data, res) {
     if (Array.isArray(data))
         return (data.map(item => {
                 return ({
                     name: item.name,
                     description: item.description,
                     categories: item.categories,
-                    image: parseImageName(item.images, 'src/dev/images')
+                    image: parseImageName(item.exh_img, res.app.get('root') + '/public/images')
                 })
             })
         )
     return {
         name: data.name, description: data.description,
         categories: data.categories,
-        image: parseImageName(data.images, 'src/dev/images')
+        image: parseImageName(data.exh_img, res.app.get('root') + '/public/images')
     }
 }
 
@@ -64,7 +75,7 @@ router.get(`/`, async (req, res, next) => {
             const {count, rows: result} = await findAndCountExhibit(limit, offset);
             const countMaxPages = Math.round(count / limit);
             checkPages(countMaxPages, offset);
-            const responseData = getData(result);
+            const responseData = getData(result, res);
 
             res.json({
                 ok: true,
@@ -88,18 +99,23 @@ router.delete('/:uid', async (req, res) => {
             where: {uid: uid},
             include: [{
                 model: models.Image,
-                where: {owner: uid}
+                uid,
+                as: "exh_img"
+
             }]
 
 
         });
 
-        const isDestroy = (async function () {
-            if (result.images) {
+        const isDestroy = await (async function () {
+            if (result.exh_img) {
+                deleteErrorImage(res, result.exh_img)
                 await models.Image.destroy({where: {owner: uid}})
+                const resultDestroy = await models.Exhibit.destroy({where: {uid: uid}})
+                return resultDestroy
             }
-            const resultDestroy = await models.Exhibit.destroy({where: {uid: uid}})
-            return resultDestroy
+            return 0
+
         })();
 
         if (isDestroy)
@@ -107,13 +123,12 @@ router.delete('/:uid', async (req, res) => {
                 ok: true,
                 isDestroy,
             });
-        else {
-            res.status(400).send('Exhibit not exist');
-        }
+
     } catch (error) {
         res.json({
             ok: false,
             error,
+            message:'Exhibit not exist'
         });
     }
 });
@@ -125,10 +140,10 @@ router.get('/:uid', async (req, res) => {
             where: {uid: uid},
             include: [{
                 model: models.Image,
-                where: {owner: uid}
+                as: "exh_img"
             }]
         });
-        const responseData = getData(result);
+        const responseData = getData(result, res);
 
         res.json({
             ok: true,
@@ -175,7 +190,7 @@ router.put('/', async (req, res) => {
                 //
                 // })
 
-                result.set({images:[{name: "DSADSAD"}, {name: "sfdsffds"}]})
+                result.set({images: [{name: "DSADSAD"}, {name: "sfdsffds"}]})
                 console.log(JSON.stringify(result.images))
                 if (result.images.length < sendDataFiles.length) {
                     const inputFiles = sendDataFiles.length;
@@ -251,19 +266,31 @@ router.post('/', (req, res) => {
                 const sendDataFiles = [];
 
                 for (const file of files) {
-                    sendDataFiles.push({owner: uid, name: file.filename})
+                    sendDataFiles.push({owner: +uid, name: file.filename})
+                }
+                try{
+                const resultCreateExhibit = await models.Exhibit.create({
+                    uid,
+                    name,
+                    description,
+                    categories
+                });
+                }
+                catch(error){
+                    await deleteErrorImage(res, sendDataFiles)
+                    throw error
                 }
 
-                const resultCreateExhibit = await models.Exhibit.create({uid, name, description, categories});
-                if (resultCreateExhibit) {
-                    await models.Image.bulkCreate(sendDataFiles);
-                    res.json({
-                        ok: true,
-                        resultCreateExhibit
-                    });
-                }
+                models.Image.bulkCreate(sendDataFiles);
+                res.json({
+                    ok: true,
+                });
 
-            } catch (error) {
+
+            } catch
+                (error) {
+
+                //TODO----------------------
                 res.json({
                     ok: false,
                     error,
@@ -291,10 +318,8 @@ router.post('/', (req, res) => {
         }
 
     })
-});
-
-
-// const {uid, name, description, image, categories} = req.body;
+})
+;
 
 
 module.exports = router;

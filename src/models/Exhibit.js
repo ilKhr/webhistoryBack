@@ -7,25 +7,21 @@ function defineExhibit(database) {
         'exhibits',
         {
             uid: {
-                type: Sequelize.STRING,
-                alowNull: false,
+                type: Sequelize.INTEGER,
+                allowNull: false,
                 unique: true,
             },
-            // owner: {
-            //     type: Sequelize.STRING,
-            //     alowNull: false,
-            // },
             name: {
                 type: Sequelize.STRING,
-                alowNull: false,
+                allowNull: false,
             },
             description: {
                 type: Sequelize.TEXT,
-                alowNull: false,
+                allowNull: false,
             },
             categories: {
                 type: Sequelize.STRING,
-                alowNull: false,
+                allowNull: false,
             },
         },
         {
@@ -34,17 +30,7 @@ function defineExhibit(database) {
     );
 
 
-    // Exhibit.hasMany(Image(database), {
-    //     //     sourceKey: 'uid',
-    //     //     as:'images',
-    //     //     foreignKey: "owner",
-    //     //     onDelete: 'cascade',
-    //     //     onUpdate: true,
-    //     //     individualHooks: true,
-    //     //     hooks: true
-    //     // });
-    // Exhibit.sync({force: true})
-    Exhibit.hasMany(Image(database), {as:"images", sourceKey: 'uid', foreignKey: "owner", hooks: true});
+
 
 
     return Exhibit;

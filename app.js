@@ -3,9 +3,10 @@ require('dotenv').config();
 const Routes = require('./src/routes/Routes');
 const bodyParser = require('body-parser');
 
-
+const port = (process.env.PORT || 3000)
 const app = express();
 
+app.set('root', __dirname);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -24,12 +25,12 @@ app.use(function (err, req, res, next) {
 
     if (err) {
         res.json({
-            ok: "NyAM",
+            ok: "Undefined error",
             err,
             message: "3"
         });
     }
 });
-app.listen(3000);
+app.listen(port);
 
 module.exports = app;
