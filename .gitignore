@@ -1,7 +1,8 @@
-.jshintrc
 prettier.config.js
 node_modules
 src/temp
 .vscode
+*.env
 .env
+/.env
 .idea

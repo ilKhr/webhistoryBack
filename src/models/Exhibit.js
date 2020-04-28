@@ -1,36 +1,37 @@
 const Sequelize = require('sequelize');
+const Image = require('./Image');
+
 
 function defineExhibit(database) {
     const Exhibit = database.define(
         'exhibits',
         {
             uid: {
-                type: Sequelize.STRING,
-                alowNull: false,
+                type: Sequelize.INTEGER,
+                allowNull: false,
                 unique: true,
             },
             name: {
                 type: Sequelize.STRING,
-                alowNull: false,
+                allowNull: false,
             },
             description: {
                 type: Sequelize.TEXT,
-                alowNull: false,
-            },
-            image: {
-                type: Sequelize.STRING,
-                alowNull: false,
+                allowNull: false,
             },
             categories: {
                 type: Sequelize.STRING,
-                alowNull: false,
+                allowNull: false,
             },
         },
         {
             timestamps: true,
         }
     );
-    // Exhibit.sync();
+
+
+
+
 
     return Exhibit;
 }
