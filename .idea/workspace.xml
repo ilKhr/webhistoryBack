@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b899de97-7667-4192-a234-e791cdbff123" name="Default Changelist" comment="Merge conflict">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1adL1oNGsXsR3e5Z03vU0rolkP2" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs>
+        <env name="DEV_USERNAME " value=" 'webuser'" />
+        <env name=" DEV_PASSWORD " value=" 'qwerty'" />
+        <env name=" DEV_DATABASE " value="  'ebhistory'" />
+        <env name=" DEV_HOST " value=" '127.0.0.1'" />
+        <env name=" DEV_PORT " value=" 5432," />
+        <env name=" DEV_DIALECT " value=" 'postgres'" />
+      </envs>
+      <method v="2" />
+    </configuration>
+    <configuration name="dev" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="$USER_HOME$/.nvm/versions/node/v12.16.2/bin/node" />
+      <envs>
+        <env name="DEV_USERNAME " value=" 'webuser'" />
+        <env name=" DEV_PASSWORD " value=" 'qwerty'" />
+        <env name=" DEV_DATABASE " value="  'ebhistory'" />
+        <env name=" DEV_HOST " value=" '127.0.0.1'" />
+        <env name=" DEV_PORT " value=" 5432," />
+        <env name=" DEV_DIALECT " value=" 'postgres'" />
+      </envs>
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b899de97-7667-4192-a234-e791cdbff123" name="Default Changelist" comment="" />
+      <created>1587060311958</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1587060311958</updated>
+      <workItem from="1587060313614" duration="16918000" />
+      <workItem from="1587117595754" duration="354000" />
+      <workItem from="1587117953009" duration="104000" />
+      <workItem from="1587118058428" duration="2334000" />
+      <workItem from="1587122767467" duration="3883000" />
+      <workItem from="1587325114742" duration="61000" />
+      <workItem from="1588091645304" duration="16452000" />
+    </task>
+    <task id="LOCAL-00001" summary="Fix big bug">
+      <created>1588111550461</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1588111550461</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Fix big bug" />
+    <MESSAGE value="Merge conflict" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge conflict" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="140" y="53" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588101784296">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="140" y="53" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1366.741@0.27.1366.741" timestamp="1588101784296" />
+    <state x="405" y="200" width="546" height="392" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1587074417796">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="405" y="200" width="546" height="392" key="#com.intellij.fileTypes.FileTypeChooser/0.27.1366.741@0.27.1366.741" timestamp="1587074417796" />
+    <state x="415" y="146" width="526" height="501" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1587062108211">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="415" y="146" width="526" height="501" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.27.1366.741@0.27.1366.741" timestamp="1587062108211" />
+    <state x="271" y="27" width="814" height="741" key="CommitChangelistDialog2" timestamp="1588112523562">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="271" y="27" width="814" height="741" key="CommitChangelistDialog2/0.27.1366.741@0.27.1366.741" timestamp="1588112523562" />
+    <state width="784" height="465" key="DebuggerActiveHint" timestamp="1588110677681">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="784" height="465" key="DebuggerActiveHint/0.27.1366.741@0.27.1366.741" timestamp="1588110677681" />
+    <state x="100" y="125" width="1166" height="543" key="DiffContextDialog" timestamp="1588112521289">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="100" y="125" width="1166" height="543" key="DiffContextDialog/0.27.1366.741@0.27.1366.741" timestamp="1588112521289" />
+    <state x="465" y="153" width="426" height="486" key="FileChooserDialogImpl" timestamp="1587325173841">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="465" y="153" width="426" height="486" key="FileChooserDialogImpl/0.27.1366.741@0.27.1366.741" timestamp="1587325173841" />
+    <state width="1343" height="175" key="GridCell.Tab.0.bottom" timestamp="1588111423026">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1343" height="175" key="GridCell.Tab.0.bottom/0.27.1366.741@0.27.1366.741" timestamp="1588111423026" />
+    <state width="1343" height="175" key="GridCell.Tab.0.center" timestamp="1588111423024">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1343" height="175" key="GridCell.Tab.0.center/0.27.1366.741@0.27.1366.741" timestamp="1588111423024" />
+    <state width="1343" height="175" key="GridCell.Tab.0.left" timestamp="1588111423022">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1343" height="175" key="GridCell.Tab.0.left/0.27.1366.741@0.27.1366.741" timestamp="1588111423022" />
+    <state width="1343" height="175" key="GridCell.Tab.0.right" timestamp="1588111423025">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1343" height="175" key="GridCell.Tab.0.right/0.27.1366.741@0.27.1366.741" timestamp="1588111423025" />
+    <state width="1343" height="241" key="GridCell.Tab.1.bottom" timestamp="1588110706721">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1343" height="241" key="GridCell.Tab.1.bottom/0.27.1366.741@0.27.1366.741" timestamp="1588110706721" />
+    <state width="1343" height="241" key="GridCell.Tab.1.center" timestamp="1588110706720">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1343" height="241" key="GridCell.Tab.1.center/0.27.1366.741@0.27.1366.741" timestamp="1588110706720" />
+    <state width="1343" height="241" key="GridCell.Tab.1.left" timestamp="1588110706720">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1343" height="241" key="GridCell.Tab.1.left/0.27.1366.741@0.27.1366.741" timestamp="1588110706720" />
+    <state width="1343" height="241" key="GridCell.Tab.1.right" timestamp="1588110706721">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1343" height="241" key="GridCell.Tab.1.right/0.27.1366.741@0.27.1366.741" timestamp="1588110706721" />
+    <state width="1343" height="241" key="GridCell.Tab.2.bottom" timestamp="1588110706723">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1343" height="241" key="GridCell.Tab.2.bottom/0.27.1366.741@0.27.1366.741" timestamp="1588110706723" />
+    <state width="1343" height="241" key="GridCell.Tab.2.center" timestamp="1588110706722">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1343" height="241" key="GridCell.Tab.2.center/0.27.1366.741@0.27.1366.741" timestamp="1588110706722" />
+    <state width="1343" height="241" key="GridCell.Tab.2.left" timestamp="1588110706721">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1343" height="241" key="GridCell.Tab.2.left/0.27.1366.741@0.27.1366.741" timestamp="1588110706721" />
+    <state width="1343" height="241" key="GridCell.Tab.2.right" timestamp="1588110706722">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1343" height="241" key="GridCell.Tab.2.right/0.27.1366.741@0.27.1366.741" timestamp="1588110706722" />
+    <state width="1343" height="241" key="GridCell.Tab.3.bottom" timestamp="1588110706724">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1343" height="241" key="GridCell.Tab.3.bottom/0.27.1366.741@0.27.1366.741" timestamp="1588110706724" />
+    <state width="1343" height="241" key="GridCell.Tab.3.center" timestamp="1588110706723">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1343" height="241" key="GridCell.Tab.3.center/0.27.1366.741@0.27.1366.741" timestamp="1588110706723" />
+    <state width="1343" height="241" key="GridCell.Tab.3.left" timestamp="1588110706723">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1343" height="241" key="GridCell.Tab.3.left/0.27.1366.741@0.27.1366.741" timestamp="1588110706723" />
+    <state width="1343" height="241" key="GridCell.Tab.3.right" timestamp="1588110706724">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1343" height="241" key="GridCell.Tab.3.right/0.27.1366.741@0.27.1366.741" timestamp="1588110706724" />
+    <state x="568" y="266" width="489" height="260" key="MultipleFileMergeDialog" timestamp="1588112246048">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="568" y="266" width="489" height="260" key="MultipleFileMergeDialog/0.27.1366.741@0.27.1366.741" timestamp="1588112246048" />
+    <state x="277" y="130" width="802" height="533" key="Vcs.Push.Dialog.v2" timestamp="1588112166709">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="277" y="130" width="802" height="533" key="Vcs.Push.Dialog.v2/0.27.1366.741@0.27.1366.741" timestamp="1588112166709" />
+    <state x="100" y="125" width="1166" height="543" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1587118428979">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="100" y="125" width="1166" height="543" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.27.1366.741@0.27.1366.741" timestamp="1587118428979" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/routes/exhibitRoutes.js</url>
+          <line>34</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/routes/exhibitRoutes.js</url>
+          <line>60</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/routes/exhibitRoutes.js</url>
+          <line>78</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/routes/exhibitRoutes.js</url>
+          <line>113</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/routes/exhibitRoutes.js</url>
+          <line>100</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
