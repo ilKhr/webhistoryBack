@@ -2,6 +2,7 @@ const Sequelize = require('sequelize');
 const requireModels = require('sequelize-require-models');
 
 
+console.log(`Await connect to ${process.env.DATABASE_URL}`)
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialect: 'postgres',
     dialectOptions: {
