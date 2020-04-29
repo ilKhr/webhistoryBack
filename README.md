@@ -5,9 +5,9 @@ GET `/exhibits/:uid` get exhibit
 
 
 
-DELETE `/exhibits/:uid` ####delete exhibit
+DELETE `/exhibits/:uid` #### delete exhibit
 
-POST `/exhibits/` ###body
+POST `/exhibits/` ### body
  :{ uid, name, description, category, max 3 image, size < 1MB}
 | uid                         | integer |
 |-----------------------------|---------|
