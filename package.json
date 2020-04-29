@@ -1,14 +1,14 @@
 {
     "name": "webhistoryback",
     "version": "1.0.0",
-    "main": "index.js",
+    "main": "app.js",
     "scripts": {
         "dev": "nodemon app.js",
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "node app.js"
     },
     "engines": {
-        "node": ">=12.10.0"
+        "node": "12.16.2"
     },
     "author": "",
     "license": "ISC",

@@ -18,6 +18,7 @@ function defineImage(database) {
             timestamps: true,
         }
     );
+    Image.sync();
 
 
     return Image;

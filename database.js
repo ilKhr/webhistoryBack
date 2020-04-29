@@ -33,6 +33,6 @@ models.Image.belongsTo(models.Exhibit,{
     foreignKey: 'owner'
 });
 // sequelize.sync({force: true});
-sequelize.sync();
+// sequelize.sync();
 
 module.exports = {sequelize, models}
