@@ -2,8 +2,8 @@ const Sequelize = require('sequelize');
 const requireModels = require('sequelize-require-models');
 
 
-console.log(process.env)
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
+console.log("Connect to DB...")
+const sequelize = new Sequelize(process.env.EROKU_POSTGRESQL_JADE_URL || process.env.DATABASE_URL, {
     dialect: 'postgres',
     logging: false,
 });
