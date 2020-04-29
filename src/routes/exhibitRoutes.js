@@ -1,10 +1,8 @@
 const router = require('express').Router();
 const multer = require('multer');
 const fs = require('fs');
-const {sequelize} = require('../../database')
 const upload = require('../../multerConfig').array("multipleImage", 3);
 const {models} = require('../../database');
-const app = require('../../app')
 
 async function deleteErrorImage(res, sendDataFiles) {
         sendDataFiles.forEach(file => {
@@ -69,7 +67,7 @@ function getData(data, res) {
     }
 }
 
-router.get(`/`, async (req, res, next) => {
+router.get(`/`, async (req, res) => {
         const {limit, offset} = req.query;
         try {
             const {count, rows: result} = await findAndCountExhibit(limit, offset);
@@ -111,8 +109,7 @@ router.delete('/:uid', async (req, res) => {
             if (result.exh_img) {
                 deleteErrorImage(res, result.exh_img)
                 await models.Image.destroy({where: {owner: uid}})
-                const resultDestroy = await models.Exhibit.destroy({where: {uid: uid}})
-                return resultDestroy
+                 return await models.Exhibit.destroy({where: {uid: uid}})
             }
             return 0
 
@@ -160,98 +157,98 @@ router.get('/:uid', async (req, res) => {
 
 
 // НЕ РАБОТАЕТ ------------------------------------------------------->
-router.put('/', async (req, res) => {
-    upload(req, res, async function (err) {
-        if (!err) {
-            const {uid, name, description, categories} = req.body;
-
-            const files = req.files;
-
-
-            const sendDataFiles = [];
-
-            for (const image of files) {
-                // sendDataFiles.push({owner: uid, name: image.filename+"GRYA"})
-                sendDataFiles.push({owner: uid, name: "lol"})
-
-            }
-            try {
-                const result = await models.Exhibit.findOne({
-                    where: {uid: uid},
-                    include: [{
-                        model: models.Image,
-                        as: 'images'
-                    }]
-                });
-
-
-                // result.images.map((image, index) => {
-                //     image.name = sendDataFiles[index].name
-                //
-                // })
-
-                result.set({images: [{name: "DSADSAD"}, {name: "sfdsffds"}]})
-                console.log(JSON.stringify(result.images))
-                if (result.images.length < sendDataFiles.length) {
-                    const inputFiles = sendDataFiles.length;
-                    const existFiles = result.images.length;
-                    sendDataFiles.splice(0, existFiles)
-                    await models.Image.bulkCreate(sendDataFiles);
-                }
-
-
-                if (result) {
-
-                    const resultUpdateExhibit = await result.save()
-                    // const resultUpdateExhibit = await result.update({
-                    //     name,
-                    //     description,
-                    //     categories,
-                    //     include: [{model: models.Image}]
-                    // });
-
-                    // console.log(JSON.stringify(result, null, 4))
-
-                    if (resultUpdateExhibit) {
-                        res.json({
-                            ok: true,
-                            resultUpdateExhibit
-                        });
-                    }
-                } else {
-                    res.json({
-                        ok: false,
-                        message: "И где данные?",
-                    });
-                }
-            } catch (error) {
-                res.json({
-                    ok: false,
-                    error,
-                });
-                console.log(error)
-            }
-        } else if (err instanceof multer.MulterError) {
-            if (err.code === 'LIMIT_FILE_SIZE') {
-                res.json({
-                    ok: false,
-                    message: "File too large"
-                })
-            } else if (err.code === "LIMIT_FILE_COUNT") {
-                res.json({
-                    ok: false,
-                    message: "Too many files"
-                })
-
-            }
-        } else if (err) {
-            res.json({
-                ok: false,
-                message: "Тип файла не подходит"
-            })
-        }
-    })
-});
+// router.put('/', async (req, res) => {
+//     upload(req, res, async function (err) {
+//         if (!err) {
+//             const {uid, name, description, categories} = req.body;
+//
+//             const files = req.files;
+//
+//
+//             const sendDataFiles = [];
+//
+//             for (const image of files) {
+//                 // sendDataFiles.push({owner: uid, name: image.filename+"GRYA"})
+//                 sendDataFiles.push({owner: uid, name: "lol"})
+//
+//             }
+//             try {
+//                 const result = await models.Exhibit.findOne({
+//                     where: {uid: uid},
+//                     include: [{
+//                         model: models.Image,
+//                         as: 'images'
+//                     }]
+//                 });
+//
+//
+//                 // result.images.map((image, index) => {
+//                 //     image.name = sendDataFiles[index].name
+//                 //
+//                 // })
+//
+//                 result.set({images: [{name: "DSADSAD"}, {name: "sfdsffds"}]})
+//                 console.log(JSON.stringify(result.images))
+//                 if (result.images.length < sendDataFiles.length) {
+//                     const inputFiles = sendDataFiles.length;
+//                     const existFiles = result.images.length;
+//                     sendDataFiles.splice(0, existFiles)
+//                     await models.Image.bulkCreate(sendDataFiles);
+//                 }
+//
+//
+//                 if (result) {
+//
+//                     const resultUpdateExhibit = await result.save()
+//                     // const resultUpdateExhibit = await result.update({
+//                     //     name,
+//                     //     description,
+//                     //     categories,
+//                     //     include: [{model: models.Image}]
+//                     // });
+//
+//                     // console.log(JSON.stringify(result, null, 4))
+//
+//                     if (resultUpdateExhibit) {
+//                         res.json({
+//                             ok: true,
+//                             resultUpdateExhibit
+//                         });
+//                     }
+//                 } else {
+//                     res.json({
+//                         ok: false,
+//                         message: "И где данные?",
+//                     });
+//                 }
+//             } catch (error) {
+//                 res.json({
+//                     ok: false,
+//                     error,
+//                 });
+//                 console.log(error)
+//             }
+//         } else if (err instanceof multer.MulterError) {
+//             if (err.code === 'LIMIT_FILE_SIZE') {
+//                 res.json({
+//                     ok: false,
+//                     message: "File too large"
+//                 })
+//             } else if (err.code === "LIMIT_FILE_COUNT") {
+//                 res.json({
+//                     ok: false,
+//                     message: "Too many files"
+//                 })
+//
+//             }
+//         } else if (err) {
+//             res.json({
+//                 ok: false,
+//                 message: "Тип файла не подходит"
+//             })
+//         }
+//     })
+// });
 // НЕ РАБОТАЕТ ------------------------------------------------------->
 
 
@@ -269,7 +266,7 @@ router.post('/', (req, res) => {
                     sendDataFiles.push({owner: +uid, name: file.filename})
                 }
                 try{
-                const resultCreateExhibit = await models.Exhibit.create({
+                    await models.Exhibit.create({
                     uid,
                     name,
                     description,
@@ -290,7 +287,6 @@ router.post('/', (req, res) => {
             } catch
                 (error) {
 
-                //TODO----------------------
                 res.json({
                     ok: false,
                     error,

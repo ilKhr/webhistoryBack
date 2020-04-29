@@ -1,5 +1,4 @@
 const Sequelize = require('sequelize');
-const Exhibit = require('./Exhibit');
 
 function defineImage(database) {
     const Image = database.define(
