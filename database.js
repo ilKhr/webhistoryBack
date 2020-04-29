@@ -8,6 +8,7 @@ const sequelize = new Sequelize(process.env.EROKU_POSTGRESQL_JADE_URL || process
     logging: false,
 });
 
+console.log(sequelize)
 sequelize
     .authenticate()
     .then(() => {
