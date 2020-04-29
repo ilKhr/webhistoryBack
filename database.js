@@ -10,6 +10,15 @@ const sequelize = new Sequelize(process.env.DATABASE_URL, {
     logging: false,
 });
 
+sequelize
+    .authenticate()
+    .then(() => {
+        console.log('---------------------------Connection has been established successfully');
+    })
+    .catch(err => {
+        console.error('?????????????????????????Unable to connect to the database:', err);
+    });
+
 const models = requireModels(sequelize, `${__dirname}/src/models`);
 
 models.Exhibit.hasMany(models.Image, {
