@@ -1,7 +1,8 @@
 const express = require('express');
+require('dotenv').config();
 const Routes = require('./src/routes/Routes');
 const bodyParser = require('body-parser');
-const sequelize = require('./database')
+
 const port = (process.env.PORT || 3000)
 const app = express();
 
