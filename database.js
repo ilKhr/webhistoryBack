@@ -3,7 +3,7 @@ const requireModels = require('sequelize-require-models');
 
 
 console.log("Connect to DB...")
-const sequelize = new Sequelize(process.env.EROKU_POSTGRESQL_JADE_URL || process.env.DATABASE_URL, {
+const sequelize = new Sequelize('webhistory', 'postgres', '159753' , {
     dialect: 'postgres',
     logging: false,
 });

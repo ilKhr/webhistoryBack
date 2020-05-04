@@ -1,0 +1,139 @@
+body{
+	margin: 0;
+}
+html{ 
+	background-color: #fff
+}  
+.contauner2{max-width: 1350px;
+ margin: 0 auto;
+}
+.gvi{
+	width: 100px; 
+	height: 100px;
+	float: left;
+	position: absolute;
+	left: 130px;
+	top: 2px;
+}
+.loggg{
+	position: absolute;
+width: 230px;
+height: 103px;
+right: 0;
+float: right;
+top: 0px;
+
+}
+.out{
+	margin-left: 300px;
+}
+header{background:#fff;
+
+padding: 25px 0; 
+border:0.5px solid #000000;
+}
+.container{
+ width:450px;
+ margin: 0 auto 0 auto;
+text-align: center;
+border-radius: 17px 17px 17px 17px;
+padding-bottom: 20px;
+padding-top: 40px;
+} 
+input[type="text"]{
+ width: 450px;
+ height:40px;
+ font-size: 18px;
+ border:1px solid #E5E5E5;
+ border-radius: 4px;
+ padding-left: 5px;
+} 
+.dws-input:hover::before{
+    color: #319ebc;
+    transition: all 0.3s;}
+.dws-input input hover{
+ box-shadow: 0 0 6px 3px rgba(58, 219, 253, 0.35);
+}
+ 
+ textarea{ width: 450px;
+ height:40px;
+ font-size: 18px;
+ margin-bottom: 25px;
+ border-radius: 11px;
+ padding-left: 5px;
+ border:1px solid #E5E5E5;
+}
+select{
+	width: 450px;
+ height:40px;
+ font-size: 18px;
+ margin-bottom: 25px;
+ border-radius: 4px;
+ padding-left: 5px;
+ border:1px solid #E5E5E5;
+}
+.dws-submit{
+	padding: 13px 30px;
+ margin: 5px 0 20px 0;
+ font-size: 15px;
+ color: #fff;
+ background-color: #4499F1;
+ border: none;
+ border-bottom: 4px solid #4499F1;
+ cursor: pointer;
+}
+.dws-submit:hover{
+ transition: all 0.5s;
+ background: #fff;
+ color: #2c536c;
+}
+input[type="file"]{
+ width: 300px;
+ height:40px;
+ font-size: 18px;
+ margin-bottom: 25px;
+ border-radius: 4px;
+ padding-left: 5px;
+ background-color: #fff;
+
+}
+a {
+	text-decoration: none;
+	transition: all 0.5s ease;
+}
+.menu{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+}
+.menu_item{
+	margin-right: 18px;
+	margin-left: 10px;
+}
+.menu_item a{
+	color: #000000;
+	font-weight: 700;
+	font-size: 18px;
+	margin: auto;
+}
+.menu_item a:hover{
+	border-bottom: 1px solid #fff;
+}
+li {
+list-style-type: none; /* Убираем маркеры */
+}
+h1{
+	color: #000000;
+	font-size: 35px;
+	text-align: center;
+	margin-top: 50px;
+	line-height: 100px;
+letter-spacing: 0.2em;
+}
+p{
+	text-align: left;
+	
+	font-size: 18px; 
+}

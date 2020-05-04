@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static(__dirname + 'public'));
+app.use('hbsFiles', express.static(__dirname + '/src/hbsFiles'));
 
 app.use(function (req, res, next) {
     console.log(`${new Date()}: [${req.method}] ${req.url}`);
@@ -19,6 +20,12 @@ app.use(function (req, res, next) {
 
 app.use('/', Routes.homeRouter);
 app.use('/exhibits', Routes.exhibitRouter);
+
+// body parser
+
+app.post('/addhui', (req, res) =>{
+    console.log(req.body);
+})
 
 app.use(function (err, req, res, next) {
     console.log(err)
@@ -31,6 +38,8 @@ app.use(function (err, req, res, next) {
         });
     }
 });
+
+
 app.listen(port);
 
 module.exports = app;
