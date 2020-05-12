@@ -53,17 +53,19 @@ function getData(data, res) {
     if (Array.isArray(data))
         return (data.map(item => {
                 return ({
+                    uid: item.uid,
                     name: item.name,
                     description: item.description,
                     categories: item.categories,
-                    image: parseImageName(item.exh_img, res.app.get('root') + '/public/images')
+                    image: parseImageName(item.exh_img, 'images/')
                 })
             })
         )
     return {
+        uid: data.uid,
         name: data.name, description: data.description,
         categories: data.categories,
-        image: parseImageName(data.exh_img, res.app.get('root') + '/public/images')
+        image: parseImageName(data.exh_img, 'images/')
     }
 }
 
