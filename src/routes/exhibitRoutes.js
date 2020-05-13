@@ -13,8 +13,23 @@ async function deleteErrorImage(res, sendDataFiles) {
         })
 }
 
-async function findAndCountExhibit(limit, offset) {
-    return models.Exhibit.findAndCountAll({
+async function findAndCountExhibit(limit, offset, categories) {
+    if (categories){
+        return models.Exhibit.findAndCountAll({
+            where: {categories:categories},
+            distinct: true,
+            include: [{
+                model: models.Image,
+                as: "exh_img"
+            }],
+            order: [
+                ['name', 'ASC']
+            ],
+            offset, limit
+        });
+
+    }else{
+        return models.Exhibit.findAndCountAll({
         distinct: true,
         include: [{
             model: models.Image,
@@ -25,6 +40,7 @@ async function findAndCountExhibit(limit, offset) {
         ],
         offset, limit
     });
+    }
 }
 
 function parseImageName(array, path) {
@@ -69,14 +85,16 @@ function getData(data, res) {
     }
 }
 
+
 router.get(`/`, async (req, res) => {
-        const {limit, offset} = req.query;
+        const {limit, offset, categories} = req.query;
         try {
-            const {count, rows: result} = await findAndCountExhibit(limit, offset);
+            const {count, rows: result} = await findAndCountExhibit(limit, offset, categories);
+
             const countMaxPages = Math.round(count / limit);
             checkPages(countMaxPages, offset);
             const responseData = getData(result, res);
-
+            responseData.count = count;
             res.json({
                 ok: true,
                 responseData
@@ -91,6 +109,8 @@ router.get(`/`, async (req, res) => {
         }
     }
 );
+
+
 
 router.delete('/:uid', async (req, res) => {
     const {uid} = req.params;
