@@ -9,7 +9,8 @@ const app = express();
 app.set('root', __dirname);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-
+app.set("view engine", "hbs");
+    
 app.use(express.static(__dirname + 'public'));
 app.use('hbsFiles', express.static(__dirname + '/src/hbsFiles'));
 
@@ -23,9 +24,8 @@ app.use('/exhibits', Routes.exhibitRouter);
 
 // body parser
 
-app.post('/addhui', (req, res) =>{
-    console.log(req.body);
-})
+
+
 
 app.use(function (err, req, res, next) {
     console.log(err)

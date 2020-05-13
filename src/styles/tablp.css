@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&subset=cyrillic');
+body{
+	margin: 0;
+}
+html{ 
+	background-color: #fff
+}  
+.contauner2{max-width: 1350px;
+ margin: 0 auto;
+}
+.gvi{
+	width: 100px; 
+	height: 100px;
+	float: left;
+	position: absolute;
+	left: 50px;
+	top: 2px;
+}
+.loggg{
+	position: absolute;
+width: 230px;
+height: 102px;
+right: 0;
+float: right;
+top: 0px;
+
+}
+.out{
+	margin-left: 170px;
+}
+header{background:#fff;
+
+padding: 21px 0; 
+box-shadow: 0.4em 0.4em 5px rgba(122,122,122,0.5);
+}
+a {
+	text-decoration: none;
+	transition: all 0.5s ease;
+}
+.menu{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+}
+.menu_item{
+	margin-right: 45px;
+	margin-left:10px;
+}
+.menu_item a{
+	color: #000000;
+	font-weight: 600;
+	font-size: 25px;
+	margin: auto;
+	letter-spacing: 0.05em;
+}
+.menu_item a:hover{
+	border-bottom: 1px solid #fff;
+}
+li {
+list-style-type: none; /* Убираем маркеры */
+}
+.container{
+	margin: 0 auto 0 auto;
+text-align: center;
+padding-bottom: 30px;
+background-color: #ffff;
+	}
+h1{
+	font-size: 35px;
+	text-align: center;
+	margin-top: 50px;}
+p{
+	font-size: 25px; 
+	font-family: 'Roboto', sans-seif;
+}
+.nr{
+	width: 500px;
+	height: 40px;
+	font-size: 22px;
+}
+.strok{
+text-align: left;
+	margin-left: 200px;
+}
+select{
+	width: 500px;
+	height: 45px;
+	font-size: 22px;
+	border-radius: 1px;
+	}
+.cs{
+	margin-right: 350px;
+}
+.catg{
+	text-align: right;
+	margin-right: 200px;
+	margin-top: -136px;
+}
+.op{
+	width: 1200px;
+	height: 200px;
+}
+.ops{
+	text-align: left;
+	margin-left: 200px;
+}
+input[type="submit"]{
+	width: 150px;
+height: 92px;
+ font-size: 28px;
+ color: #fff;
+ background-color: #04576F;
+ border-radius: 15px 15px 15px 15px;
+ cursor: pointer;
+}
+textarea{
+	font-size: 22px; 
+	font-family: 'Roboto', sans-seif;
+	border-radius: 1px;
+}
+.save{
+	margin-top: 50px;
+	margin-right: 70px;
+}
+.dalete{
+	margin-top: 50px;
+	margin-left: 70px;
+}
+input[type="text"]{
+	width: 350px;
+	height: 50px;
+	font-size: 32px;
+	color: #000000;
+	background-color: #fff;
+	margin-top: 80px;
+	 border: 1px solid #fff;
+}
+input[type="image"]{
+	width: 350px;
+	height: 350px;
+	margin-top: 60px;
+	margin-bottom: 20px;
+}

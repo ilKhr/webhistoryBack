@@ -3,67 +3,85 @@
  <head>
  	<script src="https://kit.fontawesome.com/d669a9d73a.js" crossorigin="anonymous"></script>
     <meta charset="utf-8">
-    <link href="/addhuiStyles" rel="stylesheet" type="text/css">
+    <link href="/exhibitsStyles" rel="stylesheet" type="text/css">
     <link href="https://.com/css?family=Raleway&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/font-awesome.css" type="text/css">
  <title>Добавление экспонатов</title>
  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
  </head>
- <body>
- 	<header>
- 		<div class="contauner2">
- 			<img src="images/admin.png" class="loggg">
- 			<img src="images/log.png" class="gvi">
- 			<div class="out">
- 			<ul class="menu">
- 				<li class="menu_item">
- 					<a href="#">Главная</a>
- 				</li>
- 				<li class="menu_item">
- 					<a href="#">Загрузка</a>
- 				</li>
- 				<li class="menu_item">
- 					<a href="#">Экспонаты</a>
- 				</li>
- 				<li class="menu_item">
- 					<a href="#">Новости</a>
- 				</li>
+	<body>
+		<header>
 
- 			</ul>
- 		</div>
- 			
- 		</div>
+			<div class="contauner2">
+				<img src="images/admin.png" class="loggg">
+				<img src="images/log.png" class="gvi">
+
+				<div class="out">
+
+					<ul class="menu">
+						<li class="menu_item">
+							<a href="#">Главная</a>
+						</li>
+						<li class="menu_item">
+							<a href="#">Загрузка</a>
+						</li>
+						<li class="menu_item">
+							<a href="#">Экспонаты</a>
+						</li>
+						<li class="menu_item">
+							<a href="#">Новости</a>
+						</li>
+					</ul>
+
+				</div>
+			</div>
  		
- 	</header><!-- /header -->
- <h1>Добавление экспонатов</h1>
- <div class="container">
- <form method="post">
- <p>Изображение</p>
- <input type="image" src="URL">
- <input type="file" name="picture"><br><br>
- <div class="dws-input">
- <p>Имя</p>
- <input type="text" name="name"><br><br>
- </div>
- <div class="dws-input">
- <p>id</p>
- <input type="text" name="id"><br><br>
- </div>
- <div class="dws-textarea">
- <p>Описание</p>
- <textarea rows="20" cols="30" name="text"></textarea><br><br>
- </div>
- <p>Категория</p>
- <select name="categor">
-  <option>Картины</option>
-  <option>Фото</option>
-  <option>Техника</option>
-</select><br><br>
- <input class="dws-submit" type="submit" name="submit" value="Загрузить">
- </form>
-</div>
- </body>
+		</header><!-- /header -->
 
+
+	<h1>Добавление экспонатов</h1>
+
+	<input type="button" name="button" class="exp" value="Экспонаты">
+	<input type="button" name="button" class="news" value="Новости">
+
+	<div class="container">
+
+		<form method="post" action="/exhibits/" enctype="multipart/form-data">  <!-- форма -->
+
+			<div class="dws-input">
+				<p>Имя</p>
+				<input type="text" name="name"><br><br>
+			</div>
+
+			<div class="dws-input">
+				<p>id</p>
+				<input type="text" name="uid"><br><br>
+			</div>
+
+			<p>Описание</p>
+			<textarea name="description"></textarea><br><br>
+
+			<p>Категория</p>
+			<select name="categories">
+				<option>Награды</option>
+				<option>Фото</option>
+				<option>Техника</option>
+				<option>Компьютеры</option>
+				<option>Типография</option>
+				<option>Печатные машинки</option>
+				<option>Телевизоры</option>
+				<option>Оружие</option>
+				<option>Фото и видео техника</option>
+			</select><br><br>
+
+			<p>Изображение</p>
+				<input type="file" name="multipleImage"><br><br>
+				<input type="file" name="multipleImage"><br><br>
+				<input class="dws-submit" type="submit" name="submit" value="Загрузить">
+
+		</form>
+	</div>
+ </body>
 </html>
 
 

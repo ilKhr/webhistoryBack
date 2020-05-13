@@ -46,7 +46,6 @@ function checkPages(countMaxPages, offset) {
             throw err
         }
     }
-
 }
 
 function getData(data, res) {
@@ -67,7 +66,7 @@ function getData(data, res) {
     }
 }
 
-router.get(`/`, async (req, res) => {
+router.get(`/sss`, async (req, res) => {
         const {limit, offset} = req.query;
         try {
             const {count, rows: result} = await findAndCountExhibit(limit, offset);
@@ -112,7 +111,7 @@ router.delete('/:uid', async (req, res) => {
                  return await models.Exhibit.destroy({where: {uid: uid}})
             }
             return 0
-
+            
         })();
 
         if (isDestroy)
@@ -258,6 +257,7 @@ router.post('/', (req, res) => {
         //Ошибки нет
         if (!err) {
             try {
+                console.log(req.body);
                 const files = req.files;
                 const {uid, name, description, categories} = req.body;
                 const sendDataFiles = [];
@@ -274,11 +274,11 @@ router.post('/', (req, res) => {
                 });
                 }
                 catch(error){
-                    await deleteErrorImage(res, sendDataFiles)
+                   await deleteErrorImage(res, sendDataFiles)
                     throw error
                 }
 
-                models.Image.bulkCreate(sendDataFiles);
+               models.Image.bulkCreate(sendDataFiles);
                 res.json({
                     ok: true,
                 });
@@ -286,6 +286,8 @@ router.post('/', (req, res) => {
 
             } catch
                 (error) {
+
+                console.log( res.json(error));
 
                 res.json({
                     ok: false,
