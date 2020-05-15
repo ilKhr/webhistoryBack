@@ -1,6 +1,6 @@
 `http://localhost:3000/exhibits/` - пример адреса
 
-GET `/exhibits/?limit=#&offset=#` get `limit` page `offset`
+GET `/exhibits/?limit=#&offset=#&categories=#` get `limit` page `offset`
 GET `/exhibits/:uid` get exhibit
 
 
