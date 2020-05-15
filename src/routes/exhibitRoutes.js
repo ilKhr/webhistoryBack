@@ -87,16 +87,21 @@ function getData(data, res) {
 
 
 router.get(`/`, async (req, res) => {
-        const {limit, offset, categories} = req.query;
+        let {limit}  = req.query;
+        const{offset, categories} = req.query;
+        if (limit > 10)
+            limit = 10;
         try {
             const {count, rows: result} = await findAndCountExhibit(limit, offset, categories);
 
             const countMaxPages = Math.round(count / limit);
             checkPages(countMaxPages, offset);
             const responseData = getData(result, res);
-            responseData.count = count;
+
             res.json({
                 ok: true,
+                count,
+                countMaxPages,
                 responseData
             });
         } catch
@@ -177,104 +182,6 @@ router.get('/:uid', async (req, res) => {
     }
 });
 
-
-// НЕ РАБОТАЕТ ------------------------------------------------------->
-// router.put('/', async (req, res) => {
-//     upload(req, res, async function (err) {
-//         if (!err) {
-//             const {uid, name, description, categories} = req.body;
-//
-//             const files = req.files;
-//
-//
-//             const sendDataFiles = [];
-//
-//             for (const image of files) {
-//                 // sendDataFiles.push({owner: uid, name: image.filename+"GRYA"})
-//                 sendDataFiles.push({owner: uid, name: "lol"})
-//
-//             }
-//             try {
-//                 const result = await models.Exhibit.findOne({
-//                     where: {uid: uid},
-//                     include: [{
-//                         model: models.Image,
-//                         as: 'images'
-//                     }]
-//                 });
-//
-//
-//                 // result.images.map((image, index) => {
-//                 //     image.name = sendDataFiles[index].name
-//                 //
-//                 // })
-//
-//                 result.set({images: [{name: "DSADSAD"}, {name: "sfdsffds"}]})
-//                 console.log(JSON.stringify(result.images))
-//                 if (result.images.length < sendDataFiles.length) {
-//                     const inputFiles = sendDataFiles.length;
-//                     const existFiles = result.images.length;
-//                     sendDataFiles.splice(0, existFiles)
-//                     await models.Image.bulkCreate(sendDataFiles);
-//                 }
-//
-//
-//                 if (result) {
-//
-//                     const resultUpdateExhibit = await result.save()
-//                     // const resultUpdateExhibit = await result.update({
-//                     //     name,
-//                     //     description,
-//                     //     categories,
-//                     //     include: [{model: models.Image}]
-//                     // });
-//
-//                     // console.log(JSON.stringify(result, null, 4))
-//
-//                     if (resultUpdateExhibit) {
-//                         res.json({
-//                             ok: true,
-//                             resultUpdateExhibit
-//                         });
-//                     }
-//                 } else {
-//                     res.json({
-//                         ok: false,
-//                         message: "И где данные?",
-//                     });
-//                 }
-//             } catch (error) {
-//                 res.json({
-//                     ok: false,
-//                     error,
-//                 });
-//                 console.log(error)
-//             }
-//         } else if (err instanceof multer.MulterError) {
-//             if (err.code === 'LIMIT_FILE_SIZE') {
-//                 res.json({
-//                     ok: false,
-//                     message: "File too large"
-//                 })
-//             } else if (err.code === "LIMIT_FILE_COUNT") {
-//                 res.json({
-//                     ok: false,
-//                     message: "Too many files"
-//                 })
-//
-//             }
-//         } else if (err) {
-//             res.json({
-//                 ok: false,
-//                 message: "Тип файла не подходит"
-//             })
-//         }
-//     })
-// });
-// НЕ РАБОТАЕТ ------------------------------------------------------->
-
-
-//
 router.post('/', (req, res) => {
     upload(req, res, async function (err) {
         //Ошибки нет
