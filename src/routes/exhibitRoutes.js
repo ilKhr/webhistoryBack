@@ -52,7 +52,7 @@ function parseImageName(array, path) {
 }
 
 function checkPages(countMaxPages, offset) {
-    if (countMaxPages <= offset || countMaxPages < 0) {
+    if (countMaxPages < offset || countMaxPages < 0) {
         const err = {
             err: new Error("Oops, превышен лимит страниц:)"),
             status: 404,
