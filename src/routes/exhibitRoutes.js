@@ -47,7 +47,7 @@ async function findAndCountExhibit(limit, offset, categories) {
 function parseImageName(array, path) {
     const images = []
     array.forEach(photo => {
-        images.push(path + photo.name)
+        images.push('/exhibits/' + photo.name)
     })
     return images
 }

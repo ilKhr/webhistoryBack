@@ -10,9 +10,9 @@ const port = (process.env.PORT || 3000)
 const app = express();
 
 if (process.env.NODE_ENV)
-app.set('photos', path.join(__dirname, ".." + '/museumStatic/exhibits'))
+app.set('photos', path.join(__dirname, ".." + '/museumStatic/exhibits/'))
 else
-app.set('photos',__dirname + '/public/images')
+app.set('photos',__dirname + '/public/images/')
 
 app.set('root', __dirname);
 
