@@ -4,7 +4,7 @@ const requireModels = require('sequelize-require-models');
 
 console.log("Connect to DB...")
 const sequelize = new Sequelize(process.env.EROKU_POSTGRESQL_JADE_URL || process.env.DATABASE_URL, {
-    dialect: 'postgres',
+    dialect: process.env.DIALECT_DB,
     logging: false,
 });
 

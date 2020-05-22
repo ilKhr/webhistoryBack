@@ -5,8 +5,9 @@ const upload = require('../../multerConfig').array("multipleImage", 3);
 const {models} = require('../../database');
 
 async function deleteErrorImage(res, sendDataFiles) {
+    const imagesPath = res.app.get('photos')
         sendDataFiles.forEach(file => {
-            fs.unlink( res.app.get('root') + `/public/images/${file.name}`,
+            fs.unlink( `${imagesPath}/${file.name}`,
                 function (err) {
                     if (err) throw err;
                 });
@@ -66,6 +67,7 @@ function checkPages(countMaxPages, offset) {
 }
 
 function getData(data, res) {
+    const imagesPath = res.app.get('photos')
     if (Array.isArray(data))
         return (data.map(item => {
                 return ({
@@ -73,7 +75,7 @@ function getData(data, res) {
                     name: item.name,
                     description: item.description,
                     categories: item.categories,
-                    image: parseImageName(item.exh_img, 'images/')
+                    image: parseImageName(item.exh_img, imagesPath)
                 })
             })
         )
@@ -81,7 +83,7 @@ function getData(data, res) {
         uid: data.uid,
         name: data.name, description: data.description,
         categories: data.categories,
-        image: parseImageName(data.exh_img, 'images/')
+        image: parseImageName(data.exh_img, imagesPath)
     }
 }
 
