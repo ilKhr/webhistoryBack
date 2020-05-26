@@ -6,15 +6,17 @@ const {models} = require('../../database');
 
 async function deleteErrorImage(res, sendDataFiles) {
     const imagesPath = res.app.get('photos')
-        sendDataFiles.forEach(file => {
-            fs.unlink( `${imagesPath}/${file.name}`,
-                function (err) {
-                    if (err) throw err;
-                });
-        })
+    sendDataFiles.forEach(file => {
+        fs.unlink( `${imagesPath}/${file.name}`,
+            function (err) {
+                if (err) throw err;
+            });
+    })
 }
 
-async function findAndCountExhibit(limit, offset, categories) {
+async function findAndCountExhibit(limit, offset, categories, count) {
+
+
     if (categories){
         return models.Exhibit.findAndCountAll({
             where: {categories:categories},
@@ -26,21 +28,23 @@ async function findAndCountExhibit(limit, offset, categories) {
             order: [
                 ['name', 'ASC']
             ],
-            offset, limit
+            limit,
+            offset,
+
         });
 
     }else{
         return models.Exhibit.findAndCountAll({
-        distinct: true,
-        include: [{
-            model: models.Image,
-            as: "exh_img"
-        }],
-        order: [
-            ['name', 'ASC']
-        ],
-        offset, limit
-    });
+            distinct: true,
+            include: [{
+                model: models.Image,
+                as: "exh_img"
+            }],
+            order: [
+                ['name', 'ASC']
+            ],
+            offset, limit
+        });
     }
 }
 
@@ -91,21 +95,49 @@ function getData(data, res) {
 router.get(`/`, async (req, res) => {
         let {limit}  = req.query;
         const{offset, categories} = req.query;
-        if (limit > 10)
-            limit = 10;
+        limit = 8;
         try {
             const {count, rows: result} = await findAndCountExhibit(limit, offset, categories);
-
             const countMaxPages = Math.round(count / limit);
             checkPages(countMaxPages, offset);
-            const responseData = getData(result, res);
 
-            res.json({
-                ok: true,
-                count,
-                countMaxPages,
-                responseData
-            });
+
+            if (count-(limit*offset)<limit){
+                const balance = count % limit;
+                const lastResult = await models.Exhibit.findAll({
+                    where: {categories:categories},
+                    distinct: true,
+                    include: [{
+                        model: models.Image,
+                        as: "exh_img"
+                    }],
+                    order: [
+                        ['name', 'DESC']
+                    ],
+                    limit: balance,
+
+
+                });
+                const responseData = getData((lastResult.reverse()), res)
+                res.json({
+                    ok: true,
+                    count,
+                    countMaxPages,
+                    responseData
+                });
+
+            }else{
+                const responseData = getData(result, res);
+
+                res.json({
+                    ok: true,
+                    count,
+                    countMaxPages,
+                    responseData
+                });
+            }
+
+
         } catch
             (error) {
             res.json({
@@ -138,7 +170,7 @@ router.delete('/:uid', async (req, res) => {
             if (result.exh_img) {
                 deleteErrorImage(res, result.exh_img)
                 await models.Image.destroy({where: {owner: uid}})
-                 return await models.Exhibit.destroy({where: {uid: uid}})
+                return await models.Exhibit.destroy({where: {uid: uid}})
             }
             return 0
 
@@ -198,11 +230,11 @@ router.post('/', (req, res) => {
                 }
                 try{
                     await models.Exhibit.create({
-                    uid,
-                    name,
-                    description,
-                    categories
-                });
+                        uid,
+                        name,
+                        description,
+                        categories
+                    });
                 }
                 catch(error){
                     await deleteErrorImage(res, sendDataFiles)
