@@ -98,15 +98,21 @@ router.get(`/`, async (req, res) => {
         limit = 8;
         try {
             const {count, rows: result} = await findAndCountExhibit(limit, offset, categories);
+                console.log(count)
+            let countMaxPages=-1;
                 if (count && count > limit) {
-                    const countMaxPages = Math.round(count / limit);
-                }else{
-                    const countMaxPages = 1;
+                     countMaxPages = Math.round(count / limit);
+                }else if (count){
+                    countMaxPages = 1;
+                } else {
+                    countMaxPages = 0;
                 }
+            console.log(countMaxPages)
+
             checkPages(countMaxPages, offset);
 
 
-            if (count-(limit*offset)<limit && countMaxPages>1){
+            if (count-(limit*offset)<limit && countMaxPages>0){
                 const balance = count % limit;
                 const lastResult = await models.Exhibit.findAll({
                     where: {categories:categories},
@@ -197,6 +203,7 @@ router.delete('/:uid', async (req, res) => {
 
 router.get('/:uid', async (req, res) => {
     const {uid} = req.params;
+
     try {
         const result = await models.Exhibit.findOne({
             where: {uid: uid},
