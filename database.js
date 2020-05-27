@@ -17,7 +17,9 @@ sequelize
         console.error('?????????????????????????Unable to connect to the database:', err);
     });
 
+
 const models = requireModels(sequelize, `${__dirname}/src/models`);
+
 
 models.Exhibit.hasMany(models.Image, {
     as: "exh_img",
@@ -31,7 +33,8 @@ models.Exhibit.hasMany(models.Image, {
 models.Image.belongsTo(models.Exhibit,{
     foreignKey: 'owner'
 });
+sequelize.sync();
+
 // sequelize.sync({force: true});
-// sequelize.sync();
 
 module.exports = {sequelize, models}

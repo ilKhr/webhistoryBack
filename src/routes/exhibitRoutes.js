@@ -97,7 +97,7 @@ router.get(`/`, async (req, res) => {
         const{offset, categories} = req.query;
         limit = 8;
         try {
-            const {count, rows: result} = await findAndCountExhibit(limit, offset, categories);
+            const {count, rows: result} = await findAndCountExhibit(limit, +offset, categories);
                 console.log(count)
             let countMaxPages=-1;
                 if (count && count > limit) {
