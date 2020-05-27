@@ -102,7 +102,7 @@ router.get(`/`, async (req, res) => {
             checkPages(countMaxPages, offset);
 
 
-            if (count-(limit*offset)<limit){
+            if (count-(limit*offset)<limit && countMaxPages>1){
                 const balance = count % limit;
                 const lastResult = await models.Exhibit.findAll({
                     where: {categories:categories},
@@ -202,7 +202,6 @@ router.get('/:uid', async (req, res) => {
             }]
         });
         const responseData = getData(result, res);
-
         res.json({
             ok: true,
             responseData,
